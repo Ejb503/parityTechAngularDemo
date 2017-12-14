@@ -1,20 +1,279 @@
-<!--The content below is only a placeholder and can be replaced.-->
-<div style="text-align:center">
-  <h1>
-    Welcome to {{title}}!
-  </h1>
-  <img width="300" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTAgMjUwIj4KICAgIDxwYXRoIGZpbGw9IiNERDAwMzEiIGQ9Ik0xMjUgMzBMMzEuOSA2My4ybDE0LjIgMTIzLjFMMTI1IDIzMGw3OC45LTQzLjcgMTQuMi0xMjMuMXoiIC8+CiAgICA8cGF0aCBmaWxsPSIjQzMwMDJGIiBkPSJNMTI1IDMwdjIyLjItLjFWMjMwbDc4LjktNDMuNyAxNC4yLTEyMy4xTDEyNSAzMHoiIC8+CiAgICA8cGF0aCAgZmlsbD0iI0ZGRkZGRiIgZD0iTTEyNSA1Mi4xTDY2LjggMTgyLjZoMjEuN2wxMS43LTI5LjJoNDkuNGwxMS43IDI5LjJIMTgzTDEyNSA1Mi4xem0xNyA4My4zaC0zNGwxNy00MC45IDE3IDQwLjl6IiAvPgogIDwvc3ZnPg==">
-</div>
-<h2>Here are some links to help you start: </h2>
-<ul>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://angular.io/tutorial">Tour of Heroes</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://github.com/angular/angular-cli/wiki">CLI Documentation</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://blog.angular.io/">Angular blog</a></h2>
-  </li>
-</ul>
+<!-- header component (in a normal app these would all be in seperate components) -->
+<header>
+  <mat-toolbar>
+    <mat-toolbar-row>
+      <h1 class="title">{{job.headline}}</h1>
+    </mat-toolbar-row>
+  </mat-toolbar>
+</header>
 
+<!-- Content container -->
+<div class="container">
+
+  <!-- Stepper will format all my components -->
+  <mat-vertical-stepper>
+
+  <!-- Step 1 - Equipment -->
+  <mat-step>
+    <div
+    class="step__container equipment"
+    fxLayout
+    fxLayout.xs="column"
+    fxLayoutAlign="center"
+    fxLayoutGap="10px"
+    fxLayoutGap.xs="0"
+    >
+    <ng-template matStepLabel>Equipment</ng-template>
+    <mat-card fxFlex>
+
+      <mat-card-content>
+        <h2>Equipment</h2>
+
+        <section>
+          <h3>Computer:</h3>
+          <mat-form-field class="full-width">
+            <input disabled matInput matLine [ngModel]="job.equipment.computer">
+            <mat-hint matLine>hint: I love good computers</mat-hint>
+          </mat-form-field>
+        </section>
+
+        <section>
+          <h3>Monitor:</h3>
+          <mat-form-field class="full-width">
+            <input disabled matInput matLine [ngModel]="job.equipment.monitors">
+            <mat-hint matLine>hint: Quantity not quality is the key here :)</mat-hint>
+          </mat-form-field>
+        </section>
+
+        <section>
+          <h3>Operating System: </h3>
+          <div class="checkbox__container">
+            <mat-checkbox class="full-width" disabled matLine>{{job.equipment.operatingsystem[0]}}</mat-checkbox>
+            <mat-checkbox class="full-width" color="primary" disabled checked="true" matLine>{{job.equipment.operatingsystem[1]}}</mat-checkbox>
+          </div>
+        </section>
+
+      </mat-card-content>
+
+      <mat-card-actions>
+      <button mat-raised-button color="primary" matStepperNext>Let's go onto the next step</button>
+      </mat-card-actions>
+    </mat-card>
+    </div>
+  </mat-step>
+
+  <!-- Step 2 Essentials -->
+  <mat-step>
+    <div class="step__container">
+    <ng-template matStepLabel>Essentials</ng-template>
+    <div
+    class="step__container essentials"
+    fxLayout
+    fxLayout.xs="column"
+    fxLayoutAlign="center"
+    fxLayoutGap="10px"
+    fxLayoutGap.xs="0"
+    >
+      <mat-card fxFlex>
+        <mat-card-content>
+        <h2 class="card__header">Essential company information</h2>
+        <mat-chip-list>
+          <mat-chip (click)="setValue('The Company Size is '+job.essentials.companysize)" selected="true">
+          Company Size
+          </mat-chip>
+          <mat-chip (click)="setValue('The job offer is '+job.essentials.employment)" selected="true">
+          Employment
+          </mat-chip>
+          <mat-chip (click)="setValue('The industry is '+job.essentials.industry)" selected="true">
+          Industry
+          </mat-chip>
+          <mat-chip (click)="setValue('The locations are '+job.essentials.locations[0]+'and'+job.essentials.locations[1])" selected="true">
+          Locations
+          </mat-chip>
+          <mat-chip (click)="setValue('The salary is'+job.essentials.salary.amount+job.essentials.salary.currency+job.essentials.salary.status+job.essentials.salary.interval+'with'+job.essentials.salary.stockoptions)" selected="true">
+          Salary
+          </mat-chip>
+          <mat-chip (click)="setValue('The start data is'+job.essentials.startdate)" selected="true">
+          Start Date
+          </mat-chip>
+          <mat-chip (click)="setValue('The team size is min '+job.essentials.teamsize['min']+'max'+job.essentials.teamsize['max'])" selected="true">
+          Team Size
+          </mat-chip>
+        </mat-chip-list>
+        <h2 class="card__result">Result</h2>
+        <span>{{ value }}</span>
+        </mat-card-content>
+
+        <mat-card-actions>
+          <button mat-raised-button color="primary" matStepperNext>Let's go onto the next step</button>
+        </mat-card-actions>
+
+      </mat-card>
+    </div>
+    </div>
+  </mat-step>
+
+  <!-- Step 2 Methodology -->
+  <mat-step>
+  <div class="step__container">
+  <ng-template matStepLabel>Methodology</ng-template>
+  <div
+  class="step__container essentials"
+  fxLayout
+  fxLayout.xs="column"
+  fxLayoutAlign="center"
+  fxLayoutGap="10px"
+  fxLayoutGap.xs="0"
+  >
+  <mat-card fxFlex>
+  <mat-card-content>
+  <h2 class="card__header">Essential company information</h2>
+  <mat-list dense>
+  <mat-list-item *ngFor="let value of methodology" role="listitem"><div class="full-width"><span>{{value.key}}: </span><span class="pull-right list-result">{{value.value}}</span></div></mat-list-item>
+  </mat-list>
+  </mat-card-content>
+  <mat-card-actions>
+  <button mat-raised-button color="primary" matStepperNext>Let's go onto the next step</button>
+  </mat-card-actions>
+
+  </mat-card>
+
+  </div>
+  </div>
+  </mat-step>
+  <mat-step>
+  <ng-template matStepLabel>Misc</ng-template>
+  <div class="step__container">
+  <ng-template matStepLabel>Misc</ng-template>
+  <div
+  class="step__container essentials"
+  fxLayout
+  fxLayout.xs="column"
+  fxLayoutAlign="center"
+  fxLayoutGap="10px"
+  fxLayoutGap.xs="0"
+  >
+  <div fxFlex>
+  <div class="mat-elevation-z8">
+  <div class="example-header">
+  <mat-form-field>
+  <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+  </mat-form-field>
+  </div>
+
+  <mat-table #table [dataSource]="dataSource">
+
+  <!-- Key Column -->
+  <ng-container matColumnDef="key">
+  <mat-header-cell *matHeaderCellDef> Key </mat-header-cell>
+  <mat-cell *matCellDef="let element"> {{element.key}} </mat-cell>
+  </ng-container>
+
+  <!-- Value Column -->
+  <ng-container matColumnDef="value">
+  <mat-header-cell *matHeaderCellDef> Value </mat-header-cell>
+  <mat-cell *matCellDef="let element"> {{element.value}} </mat-cell>
+  </ng-container>
+
+  <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+  <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+  </mat-table>
+
+
+  </div>
+  <div class="action-container">
+  <button mat-raised-button color="primary" matStepperNext>Let's go onto the next step</button>
+  </div>
+  </div>
+  </div>
+  </div>
+  </mat-step>
+  <mat-step>
+  <ng-template matStepLabel>Other</ng-template>
+  <div
+  class="step__container essentials"
+  fxLayout
+  fxLayout.xs="column"
+  fxLayoutAlign="center"
+  fxLayoutGap="10px"
+  fxLayoutGap.xs="0"
+  >
+  <div fxFlex>
+  <mat-grid-list cols="2" rowHeight="2:1">
+  <mat-grid-tile><span class="tile-span">{{job.other[0]}}</span></mat-grid-tile>
+  <mat-grid-tile><span class="tile-span">{{job.other[1]}}</span></mat-grid-tile>
+  <mat-grid-tile><span class="tile-span">{{job.other[2]}}</span></mat-grid-tile>
+  <mat-grid-tile><span class="tile-span">{{job.other[3]}}</span></mat-grid-tile>
+  </mat-grid-list>
+
+  <div class="action-container">
+  <button mat-raised-button color="primary" matStepperNext>Let's go onto the next step</button>
+  </div>
+
+  </div>
+  </div>
+
+  </mat-step>
+  <mat-step>
+  <ng-template matStepLabel>Profile</ng-template>
+  <div
+  class="step__container essentials"
+  fxLayout
+  fxLayout.xs="column"
+  fxLayoutAlign="center"
+  fxLayoutGap="10px"
+  fxLayoutGap.xs="0"
+  >
+  <div fxFlex>
+  <ngx-charts-advanced-pie-chart 
+  [view]="view"
+  [scheme]="colorScheme"
+  [results]="profileResults"
+  >
+  </ngx-charts-advanced-pie-chart>
+
+  <div class="action-container">
+  <button mat-raised-button color="primary" matStepperNext>Let's go onto the next step</button>
+  </div>
+  </div>
+  </div>
+
+  </mat-step>
+  <mat-step>
+  <ng-template matStepLabel>Specs</ng-template>
+  <ngx-charts-number-card
+  [view]="view"
+  [scheme]="colorScheme"
+  [results]="numberCards"
+  >
+  </ngx-charts-number-card>
+
+  </mat-step>
+
+  <mat-step>
+  <ng-template matStepLabel>Technologies</ng-template>
+  <div
+  class="step__container essentials"
+  fxLayout
+  fxLayout.xs="column"
+  fxLayoutAlign="center"
+  fxLayoutGap="10px"
+  fxLayoutGap.xs="0"
+  >
+  <div fxFlex>
+
+  <ngx-charts-bar-vertical
+  [view]="view"
+  [scheme]="colorScheme"
+  [results]="technology"
+  [legend]="true"
+  [yAxis]="true"
+  [xAxis]="true"
+  >
+  </ngx-charts-bar-vertical>
+  </div>
+  </div>
+  </mat-step>
+
+  </mat-vertical-stepper>
+</div>
