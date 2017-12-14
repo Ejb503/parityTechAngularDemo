@@ -1,6 +1,8 @@
+/*Variables*/
 $primary_color : #ff1864;
 $text_color : #414549;
 
+/*standard html elements*/
 h1,h2,h3 {
 	font-family: "Roboto";
 	font-weight: 400;
@@ -20,11 +22,50 @@ p, div, span {
 	color: $text_color;
 }
 
+/*Header*/
 header {
 	border-bottom: dashed 2px $primary_color;
 	margin-bottom: 15px;
 }
 
+/*Layout tweaks*/
+.container {
+	width: 1080px;
+	margin: 0 auto;
+}
+
+section {
+	width: 100%;
+	float: left;
+	margin: 10px 0;
+}
+
+.checkbox__container {
+	float: left;
+    width: 100%;
+    margin: 10px 0;
+}
+
+.action-container {
+	margin-top: 30px;
+}
+
+
+/*Common classes*/
+.full-width {
+	width: 100%;
+	float: left;
+}
+
+.img-responsive {
+	width: 100%;
+}
+
+.pull-right {
+	float: right;
+}
+
+/*Google material code & overrides */
 .mat-vertical-content {
 	padding: 20px;
 }
@@ -44,38 +85,15 @@ header {
 		float: left;
 		margin: 0;
 	}
+
+	h2.card__result {
+		margin-top: 30px;
+	}
+
 }
 
-.equipment {
-}
-
-.container {
-	width: 1080px;
-	margin: 0 auto;
-}
-
-/*Google material code */
-.example-h2 {
-  margin: 10px;
-}
-
-.example-section {
-  display: flex;
-  align-content: center;
-  align-items: center;
-  height: 60px;
-}
-
-.example-margin {
-  margin: 10px;
-}
-
-.mat-slider-horizontal {
-  width: 300px;
-}
-
-.mat-slider-vertical {
-  height: 300px;
+mat-grid-tile {
+	border: dashed 1px $primary_color;
 }
 
 mat-chip {
@@ -86,62 +104,8 @@ mat-chip {
   cursor: pointer;
 }
 
-section {
-	width: 100%;
-	float: left;
-	margin: 10px 0;
-}
-
-h2.card__result {
-	margin-top: 30px;
-}
-
-.full-width {
-	width: 100%;
-	float: left;
-}
-
-.img-responsive {
-	width: 100%;
-}
-
-.pull-right {
-	float: right;
-}
-
 span.list-result {
-	border-bottom: solid 2px $primary_color;
-}
-
-.checkbox__container {
-	float: left;
-    width: 100%;
-    margin: 10px 0;
-}
-
-/* Structure */
-.example-container {
-  display: flex;
-  flex-direction: column;
-  min-width: 300px;
-}
-
-.example-header {
-  min-height: 64px;
-  padding: 8px 24px 0;
-}
-
-.mat-form-field {
-  font-size: 14px;
-  width: 100%;
-}
-
-mat-grid-tile {
-	border: dashed 1px $primary_color;
-}
-
-.action-container {
-	margin-top: 30px;
+	border-bottom: solid $primary_color;
 }
 
 span.tile-span {
@@ -150,4 +114,16 @@ span.tile-span {
     background: $text_color;
     padding: 20px 10px;
     border: solid $primary_color;
+}
+
+@media only screen and (max-width: 840px) {
+	/*Layout tweaks*/
+	.container, header {
+		width: 100%;
+		overflow-x: hidden;
+	}
+	.step__container {
+		padding: 2px 0;
+	}
+
 }

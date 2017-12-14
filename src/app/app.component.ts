@@ -40,6 +40,10 @@ export class AppComponent {
   view = [950,300];
   colorScheme = 'natural';
 
+  // Setting initial varialbes for functions
+  chipValue = 'Click on a chip for the answer';
+
+
   // Filter for table
   applyFilter(filterValue: string) {
     filterValue = filterValue.trim(); // Remove whitespace
@@ -51,15 +55,19 @@ export class AppComponent {
   displayedColumns = ['key', 'value'];
   dataSource = new MatTableDataSource();
 
-  // Function for 'Chip' feature
-  value = 0;
-  setValue(value) {
-  	this.value = value;
-  }
-
   ngOnInit() {
 
+  	// Set responsive width for graphics
+    if(window.screen.width < 800){
+      this.view = [(window.screen.width-100),300];
+    }else{
+      this.view = [950,300];
+    }
+
+
+  	// Leave the console log in so you can see the object hasn't been touched :)
   	console.log(job);
+
   	// Passing the Javascript Object as is
   	this.job = job;
 
@@ -81,6 +89,7 @@ export class AppComponent {
 		}
 	}
 
+	// Bit of a hack to put the technology values into a bar chart
 	for (let key of this.technologyProperties) { 
 		if(key == 'oneof'){
 			for (let subKey of this.technologyPropertiesOneof) { 
@@ -94,6 +103,12 @@ export class AppComponent {
 	}
     this.dataSource = new MatTableDataSource(this.misc);
   }
+
+  // Function for 'Chip' feature
+  setValue(value) {
+  	this.chipValue = value;
+  }
+
 
   returnValue(value) {
 
